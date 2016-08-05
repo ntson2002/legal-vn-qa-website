@@ -1,0 +1,136 @@
+
+<div class="qa-nav-main">
+    <?php
+    include 'include/top-navigation.phtml';
+    ?>
+</div>
+
+<?php
+    $input_question = "";
+    $nrow = 2;
+    if (isset($_REQUEST["question"]))
+    {
+        $input_question = $_REQUEST["question"];
+        $nrow = round(count(explode(" ", $input_question)) / 15);
+        if ($nrow < 2) 
+            $nrow = 2;
+    }
+?>
+<div class="qa-sidepanel">
+    
+    <?php 
+        
+        if (isset($data["related_questions"]))
+        {
+            echo "<h2>Câu hỏi liên quan</h2>";
+            echo "<ul>";
+            $json_a = json_decode($data["related_questions"], true);
+            $json_a = $json_a["answer_candidates"];
+            for ($i = 0; $i < count($json_a) && $i < 10; $i = $i + 1)
+            {
+                $q = $json_a[$i]["similar_question"];
+                $short_q = implode (" ", array_slice(explode(" ",$q), 0, 30));
+                if ($short_q != $q)
+                    $short_q = $short_q . " ...";
+                echo "<li> <a href='index.php?controller=Home&action=ask&question=$q'>$short_q</a></li>";
+            }
+            echo "</ul>";
+        }    
+       
+    ?>
+</div>
+
+<div class="qa-main">
+    <h1>
+        Câu hỏi:
+    </h1>
+    <!-- QUESTION FORM-->
+    <div class="qa-part-form">
+        <form name="ask" method="post">
+            <input type="hidden" name="controller" value="Home"/>
+            <input type="hidden" name="action" value="ask"/>
+            <table class="qa-form-tall-table">
+                <tbody>
+
+                    <tr>
+                        <td class="qa-form-tall-data">
+                            <textarea name="question" 
+                                      id="title" value="" 
+                                      class="qa-form-tall-text" 
+                                      type="text"
+                                      rows="<?php echo $nrow; ?>"><?php echo $input_question;?></textarea>
+                            <p><b>Ví dụ:</b> Các bên được xã cấp đất ở có diện tích như nhau, nhưng khi được cấp giấy chứng nhận quyền sử dụng đất lại có sai lệch về diện tích của hai thửa đất dẫn đến tranh chấp về diện tích đất sai lệch đó. Việc giải quyết tranh chấp này thuộc Ủy ban nhân dân hay Tòa án?</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="qa-form-tall-buttons" style="text-align: right">
+                            <input value="Gửi câu hỏi" title="" class="qa-form-tall-button qa-form-tall-button-ask" type="submit">
+                        </td>
+                    </tr>
+                </tbody></table>
+        </form>
+    </div>
+    
+    <!-- ANSWERS-->
+    <?php 
+        if (isset($data) && isset($data["answer"]))
+        {
+            echo "<h1>Câu trả lời:</h1>";
+            echo "<div class='qa-q-list'>";
+            $count = 0;
+            $answer = $data["answer"];
+            $title = $answer["title"];
+            $highlighted_rows = array();
+            echo "<h4>$title</h4>";            
+            for ($k=0; $k< count($answer["subquestions"]); $k++)
+            {
+                for ($l=0; $l< count($answer["subquestions"][$k]["highlights"]); $l++)
+                {                    
+                    $highlighted_rows[] = $answer["subquestions"][$k]["highlights"][$l];
+                }
+            }
+                  
+            $answer_text  = "";
+            for ($i=0; $i< count($answer["answer_sentences"]); $i++)
+            {
+                $sentence = $answer["answer_sentences"][$i]["content"];
+                $new_sentence = ReferenceDetection::do_Detect($sentence);                       
+                if (in_array($i,$highlighted_rows))
+                {
+                    echo "<p style='font-style:italic; color:purple'>$new_sentence</p>";
+                }
+                else 
+                {
+                    echo "<p>$new_sentence</p>";                
+                }
+                $answer_text  = $answer_text . $sentence . "\n";
+            }
+     
+            echo "</ul>";
+            echo "<h1>Người dùng đánh giá: </h1>";
+            echo "<form method='post'>";
+            echo "<input type='hidden' name='controller' value='PairFeedBack'/>";
+            echo "<input type='hidden' name='action' value='add'/>";
+            echo "Câu trả lời trên có đúng với câu hỏi của bạn ? ";
+            
+            $array = array(
+                "1"=>"1-CÂU TRẢ LỜI KHÔNG LIÊN QUAN",
+                "2"=>"2-CÂU TRẢ LỜI LIÊN QUAN NHƯNG KHÔNG ĐÚNG NỘI DUNG HỎI",
+                "3"=>"3-CÂU TRẢ LỜI ĐÚNG NỘI DUNG MUỐN HỎI");
+            
+            echo ViewHelper::create_combobox("score", "score", $array, null);
+            echo "<input type='hidden' name='source_title' value='$title'/>";
+            echo "<input type='hidden' name='question' value='$question'/>";
+            echo "<input type='hidden' name='answer' value='$answer_text'/>";
+            
+            echo "<input value='Gửi' class='qa-form-tall-button qa-form-tall-button-ask' type='submit'>";
+            echo "</form>";
+
+            
+            echo "</div>";
+        }
+    
+    ?>
+    
+</div> <!-- END qa-main -->
+

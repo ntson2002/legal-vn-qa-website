@@ -1,0 +1,81 @@
+
+<div class="qa-nav-main">
+    <?php
+    include 'include/top-navigation.phtml';
+    ?>
+</div>
+
+
+<div class="qa-main-2">
+    <div>
+        <h1><span style='display: inline-block'>Thêm câu hỏi-câu trả lời: </span><span style='float:right; display: inline-block'><a href='index.php?controller=Pair&action=list'>Xem tất cả</a></span></h1>
+
+    </div>
+    <form name="ask" method="post">
+        <input type="hidden" name="controller" value="Pair"/>
+        <input type="hidden" name="action" value="add"/>
+
+        <!-- QUESTION FORM-->
+        <div class="qa-part-form">        
+
+            <table class="qa-form-tall-table">
+                <tbody>
+                    <tr>
+                        <td><h2>Câu hỏi:</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="qa-form-tall-data">
+                            <textarea name="question" 
+                                      id="title" value="" 
+                                      class="qa-form-tall-text" 
+                                type="text"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h2>Nguồn trích dẫn</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                         <td class="qa-form-tall-data">
+                            <textarea name="source_title" 
+                                      value="" 
+                                      class="qa-form-tall-text" 
+                                      type="text"
+                                      rows='1'></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h2>Câu trả lời:</h2>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="qa-form-tall-data" colspan='1'>
+                            <textarea name="answer" 
+                                      id="title" value="" 
+                                      class="qa-form-tall-text" 
+                                      type="text" rows='10'></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td class="qa-form-tall-data">
+                            <h2><span style="display: inline-block; width: 100px">Trạng thái</span> <span style='color:green'>NOT REVISED</span>
+                                <?php
+//                        echo ViewHelper::create_combobox("status", "status", array("REVISED", "NOT REVISED"), null) 
+                                ?>
+                            </h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="qa-form-tall-buttons" style="text-align: right">
+                            <input value="Đóng góp" title="" class="qa-form-tall-button qa-form-tall-button-ask" type="submit">
+                        </td>
+                    </tr>
+            </table>
+    </form>
+    <!-- QUESTION FORM-->  
+</div> <!-- END qa-main -->
+

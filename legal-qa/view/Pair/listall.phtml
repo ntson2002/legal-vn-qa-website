@@ -1,0 +1,48 @@
+
+<div class="qa-nav-main">
+    <?php
+    include 'include/top-navigation.phtml';
+    ?>
+</div>
+
+<div class="qa-main-2">
+    <h1><span style='display: inline-block'>Danh sách câu hỏi-trả lời: </span><span style='float:right; display: inline-block'><a href='index.php?controller=Pair&action=add'>Thêm câu hỏi-trả lời</a></span></h1>
+    <?php
+        if (isset($data["pairs"]))
+        {
+            $i = 0;
+            echo "<table id='hor-minimalist-b' style='width:900px'>";
+            echo "<tr>";
+            echo "<th>STT</th>";
+            echo "<th>Câu hỏi</th>";
+//            echo "<td>Câu trả lời</td>";
+            echo "<th>Ngày thêm</th>";
+            echo "<th>Điểm đánh giá</th>";
+            echo "<th>Trạng thái</th>";
+            echo "<th>&nbsp;</th>";
+            echo "</tr>";
+            foreach ($data["pairs"] as $p)
+            {
+                $i ++;
+                echo "<tr>";
+                echo "<td>$i</td>";
+                echo "<td>{$p->QUESTION}</td>";
+//                echo "<td>{$p->ANSWER}</td>";
+                echo "<td>{$p->DATE_ADDED}</td>";
+                echo "<td>{$p->SCORE}</td>";
+                echo "<td>{$p->STATUS}</td>";     
+                echo "<td>";
+                echo "<form>";
+                echo "<input type='hidden' name='controller' value='Pair'>";
+                echo "<input type='hidden' name='action' value='view'>";
+                echo "<input type='hidden' name='pairid' value='{$p->ID}'>";
+                echo "<input value='Xem' class='qa-form-tall-button qa-form-tall-button-ask' type='submit'>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
+    ?>
+</div> <!-- END qa-main -->
+

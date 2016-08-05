@@ -1,0 +1,39 @@
+
+<div class="qa-nav-main">
+    <?php
+    include 'include/top-navigation.phtml';
+    ?>
+</div>
+
+<div class="qa-main-2">
+    <h1><span style='display: inline-block'>Chi tiết phản hồi của người dùng: </span><span style='float:right; display: inline-block'><a href='index.php?controller=PairFeedBack&action=list'>Xem tất cả</a></span></h1>
+    <?php
+        if (isset($data["pair"]))
+        {
+            
+            $p = $data["pair"];
+//            $p = new PairModel();
+            echo "<h2>Câu hỏi:</h2>";
+//            $p = new PairModel();
+            echo $p->QUESTION;
+            echo "<h2>Câu trả lời:</h2>";
+            echo "<p><b>{$p->SOURCE_TITLE}</b></p>";
+            echo "<p>{$p->ANSWER}</p>";
+            
+//            echo "<h2><span style='display: inline-block; width: 150px'>Trạng thái</span> <span style='color:green'>{$p->STATUS}</span>";
+            echo "<h2><span style='display: inline-block; width: 150px'>Điểm đánh giá</span> <span style='color:green'>{$p->SCORE}</span></h2>";
+            
+        }
+    ?>
+    <!--<h2>Thang điểm đánh giá</h2>-->
+        <ul>
+            <li>1 - Câu trả lời và câu hỏi không liên quan</li>    
+            <li>2 - Câu trả lời có liên quan đến câu hỏi nhưng không trả lời đúng nội dung câu hỏi</li>    
+            <li>3 - Câu trả lời đúng với nội dung hỏi</li>    
+        </ul>
+    <?php
+        if (isset($p))
+            echo "<h2><span style='display: inline-block; width: 150px'>Ngày thêm</span> <span style='color:green'>{$p->DATE_ADDED}</span></h2>"; 
+    ?>
+</div> <!-- END qa-main -->
+

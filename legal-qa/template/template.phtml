@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><!-- Powered by Question2Answer - http://www.question2answer.org/ --><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Legal Question Answering system</title>
+        <link rel="stylesheet" href="css/qa-styles.css">
+        <link rel="stylesheet" href="css/table.css">
+        <link rel="alternate" type="application/rss+xml" href="http://localhost:8888/q2a/index.php?qa=feed&amp;qa_1=qa.rss" title="Recent questions and answers">
+        <link rel="search" type="application/opensearchdescription+xml" title="Legal Question Answering system" href="http://localhost:8888/q2a/index.php?qa=opensearch.xml">
+        <script>
+            var qa_root = '.\/';
+            var qa_request = '';
+        </script>
+        <script src="css/jquery-1.js"></script>
+        <script src="css/qa-page.js"></script>
+    </head>
+    <body class="qa-template-qa qa-body-js-on">
+        <script>
+            var b = document.getElementsByTagName('body')[0];
+            b.className = b.className.replace('qa-body-js-off', 'qa-body-js-on');
+        </script>
+        <div class="qam-login-bar">
+            <div class="qam-login-group">
+                <form class="qam-login-form" action="./index.php?qa=login&amp;to=index.php" method="post">
+                    <input class="qam-login-text" name="emailhandle" dir="auto" placeholder="Email or Username" type="text">
+                    <input class="qam-login-text" name="password" dir="auto" placeholder="Password" type="password">
+                    <div class="qam-rememberbox"><input name="remember" id="qam-rememberme" value="1" type="checkbox">
+                        <label for="qam-rememberme" class="qam-remember">Remember</label></div>
+                    <input name="code" value="0-1469682718-478640a9c1f531577519c018c5f82eb6cb3e9ae8" type="hidden">
+                    <input value="Log In" class="qa-form-tall-button qa-form-tall-button-login" name="dologin" type="submit">
+                </form>
+                <div class="qa-nav-user">
+                    <ul class="qa-nav-user-list">
+                        <li class="qa-nav-user-item qa-nav-user-register">
+                            <a href="http://localhost:8888/q2a/index.php?qa=register&amp;to=index.php" class="qa-nav-user-link">Register</a>
+                        </li>
+                    </ul>
+                    <div class="qa-nav-user-clear">
+                    </div>
+                </div>
+                <div class="qa-search">
+                    <form method="get" action="./index.php?qa=search">
+                        <input name="qa" value="search" type="hidden">
+                        <input name="q" class="qa-search-field" type="text" value='search field'>
+                        <input value="Search" class="qa-search-button" type="submit">
+                    </form>
+                </div>
+            </div></div>
+        <div class="qa-body-wrapper">
+
+            <div class="qa-header">
+                <div class="qa-logo">
+                    <a href="index.php" class="qa-logo-link">Hỏi đáp Pháp luật Việt Nam</a>
+                </div>
+                <div class="qa-header-clear">
+                </div>
+            </div> <!-- END qa-header -->
+
+            <div class="qa-main-shadow">
+
+                <div class="qa-main-wrapper">
+
+                     <?php require($VIEW); ?>
+                </div> <!-- END main-wrapper -->
+            </div> <!-- END main-shadow -->
+        </div> <!-- END body-wrapper -->
+        <div class="qa-footer-bottom-group">
+            <div class="qa-footer">
+                <div class="qa-nav-footer">
+                    <ul class="qa-nav-footer-list">
+                        <li class="qa-nav-footer-item qa-nav-footer-feedback">
+                            <a href="http://localhost:8888/q2a/index.php?qa=feedback" class="qa-nav-footer-link">Send feedback</a>
+                        </li>
+                    </ul>
+                    <div class="qa-nav-footer-clear">
+                    </div>
+                </div>
+                <div class="qa-attribution">
+                    &nbsp;| Snow Theme by <a href="http://www.q2amarket.com/">Q2A Market</a>
+                </div>
+                <div class="qa-attribution">
+                    Powered by <a href="http://www.question2answer.org/">Question2Answer</a>
+                </div>
+                <div class="qa-footer-clear">
+                </div>
+            </div> <!-- END qa-footer -->
+
+        </div> <!-- END footer-bottom-group -->
+
+        <div style="position:absolute; left:-9999px; top:-9999px;">
+            <span id="qa-waiting-template" class="qa-waiting">...</span>
+        </div>
+    </body><!-- Powered by Question2Answer - http://www.question2answer.org/ --></html>
